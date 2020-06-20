@@ -1,0 +1,51 @@
+
+#include <iostream>
+#include <Eigen/Dense>
+#define PI 3.141592
+
+using namespace Eigen;
+using namespace std;
+
+int main(){
+  MatrixXd m1 = MatrixXd(8, 8);
+  MatrixXd m2, m3;
+  int per;
+
+  double* alpha = new double[8];
+  for (int i=0;i < 8; i++){
+    if (i==0)
+      alpha[i] = 1./(2.*sqrt(2));
+      else {
+        alpha[i] = 0.5;
+      }
+  }
+  for(int i=0; i<8; i++){
+    for(int j=0; j<8; j++){
+      m1(i,j) = alpha[i] * cos((PI*(2.*j)*i)/16);
+    }
+  } delete alpha;
+
+  cout << "m1" <<endl<<m1<<endl;
+  cout <<"period"<<endl;
+  cin >> per;
+
+    double* alpha2 = new double[8];
+  for (int i=0;i < 8; i++){
+    if (i==0)
+      alpha2[i] = 1./(2.*sqrt(2));
+      else {
+        alpha2[i] = 0.5;
+      }
+  }
+  for(int i=0; i<8; i++){
+    for(int j=0; j<8; j++){
+      m1(i,j) = alpha2[i] * cos((per*PI*(2.*j)*i)/16);
+    }
+  } delete alpha2;
+
+
+  m2 = m1.transpose();
+  m3 = m1*m2;
+  cout << "m1" <<endl<<m1<<endl<<"m2"<<endl<<m2<<endl<<"m3"<<endl<<m3<<endl;
+  return 0;
+}
